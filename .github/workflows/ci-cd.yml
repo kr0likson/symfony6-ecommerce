@@ -24,3 +24,6 @@ jobs:
 
       - name: Run tests
         run: php bin/phpunit
+
+      - name: Run static analysis (PHPStan)
+        run: vendor/bin/phpstan analyze
