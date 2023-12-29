@@ -18,6 +18,10 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    'custom' => [
+        'path' => './assets/custom.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
@@ -26,5 +30,15 @@ return [
     ],
     '@hotwired/turbo' => [
         'version' => '7.3.0',
+    ],
+    'bootstrap' => [
+        'version' => '5.3.2',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '5.3.2',
+        'type' => 'css',
     ],
 ];
