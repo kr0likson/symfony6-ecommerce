@@ -1,11 +1,12 @@
 <header class="header_section long_section px-0">
     <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{ app.request.getBaseURL() }}">
           <span>
             Edgecut
           </span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
         </button>
 
@@ -13,7 +14,8 @@
             <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
                 <ul class="navbar-nav  ">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ app.request.getBaseURL() }}">Home <span
+                                    class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html"> About</a>
@@ -30,12 +32,17 @@
                 </ul>
             </div>
             <div class="quote_btn-container">
-                <a href="">
+                {% if app.user %}
+                    <span class="pb-5">Hello {{ app.user.email }}</span>
+                    <a href="logout"><span>Logout</span></a>
+                {% else %}
+                    <a href="login">
               <span>
                 Login
               </span>
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                </a>
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
                 <form class="form-inline">
                     <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
