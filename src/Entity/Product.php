@@ -32,6 +32,10 @@ class Product
     private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: ProductCategory::class, inversedBy: 'products')]
+
+    /**
+     * @var Collection|ProductCategory[]
+     */
     private Collection $categories;
 
     public function __construct()

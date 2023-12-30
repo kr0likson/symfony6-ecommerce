@@ -63,31 +63,9 @@ class ProductCategory
         return $this;
     }
 
-    public function getChildren(): ?self
+    public function getChildren(): Collection
     {
         return $this->children;
-    }
-
-    public function addChild(self $child): static
-    {
-        if (!$this->children->contains($child)) {
-            $this->children->add($child);
-            $child->setChildren($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChild(self $child): static
-    {
-        if ($this->children->removeElement($child)) {
-            // set the owning side to null (unless already changed)
-            if ($child->getChildren() === $this) {
-                $child->setChildren(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
