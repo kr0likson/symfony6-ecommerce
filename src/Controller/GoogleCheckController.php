@@ -25,7 +25,7 @@ class GoogleCheckController extends AbstractController
     {
         $this->managerRegistry = $managerRegistry;
     }
-     #[Route('/google/check', name: 'app_check_google')]
+    #[Route('/google/check', name: 'app_check_google')]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
         return $clientRegistry
@@ -40,8 +40,7 @@ class GoogleCheckController extends AbstractController
         GoogleUserFactory $userFactory,
         UserAuthenticatorInterface $userAuthenticator,
         LoginFormAuthenticator $authenticator,
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $client = $clientRegistry->getClient('google');
         $accessToken = $client->getAccessToken();
         $userCredentials = $client->fetchUserFromToken($accessToken)->toArray();
