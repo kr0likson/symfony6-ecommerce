@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -45,6 +46,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
+
+    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Order::class)]
+    private Collection $orders;
+
+    #[ORM\OneToOne(mappedBy: 'customer', cascade: ['persist', 'remove'])]
+    private ?Cart $cart = null;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -152,6 +164,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getCustomer() === $this) {
+                $order->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Cart $cart): static
+    {
+        // set the owning side of the relation if necessary
+        if ($cart->getCustomer() !== $this) {
+            $cart->setCustomer($this);
+        }
+
+        $this->cart = $cart;
 
         return $this;
     }
