@@ -3,41 +3,50 @@
 {% block title %}Hello IndexController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
     <!DOCTYPE html>
     <html>
 
     <head>
         <!-- Basic -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <!-- Mobile Metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <!-- Site Metas -->
-        <link rel="icon" href="images/fevicon.png" type="image/gif" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <link rel="icon" href="images/fevicon.png" type="image/gif"/>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
 
         <title>Edgecut</title>
 
 
         <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 
         <!-- fonts style -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
 
         <!-- font awesome style -->
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/font-awesome.min.css" rel="stylesheet"/>
         <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet"/>
         <!-- responsive style -->
-        <link href="css/responsive.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet"/>
 
     </head>
 
@@ -58,7 +67,8 @@
                                             Furniture Needs
                                         </h1>
                                         <p>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem
+                                            maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
                                         </p>
                                         <div class="btn-box">
                                             <a href="" class="btn1">
@@ -88,7 +98,8 @@
                                             Furniture Needs
                                         </h1>
                                         <p>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem
+                                            maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
                                         </p>
                                         <div class="btn-box">
                                             <a href="" class="btn1">
@@ -118,7 +129,8 @@
                                             Furniture Needs
                                         </h1>
                                         <p>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem
+                                            maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
                                         </p>
                                         <div class="btn-box">
                                             <a href="" class="btn1">
@@ -158,130 +170,33 @@
                     Our Furniture
                 </h2>
                 <p>
-                    which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't an
+                    which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you
+                    need to be sure there isn't an
                 </p>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f1.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                brown Chair Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 100.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
+                {% for product in products %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="uploads/images/{{ product.image }}" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    {{ product.name }}
+                                </h5>
+                                <div class="price_box">
+                                    <h6 class="price_heading">
+                                        <span>$</span> {{ product.price }}
+                                    </h6>
+                                    <a href="">
+                                        Buy Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f2.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Double Bed Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 200.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f3.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                House Chair Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 200.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f4.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                brown Table Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 100.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f5.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Blue Chair Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 200.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="images/f6.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Brown Table Design
-                            </h5>
-                            <div class="price_box">
-                                <h6 class="price_heading">
-                                    <span>$</span> 200.00
-                                </h6>
-                                <a href="">
-                                    Buy Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -307,7 +222,9 @@
                             </h2>
                         </div>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti dolorem eum consequuntur ipsam repellat dolor soluta aliquid laborum, eius odit consectetur vel quasi in quidem, eveniet ab est corporis tempore.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti dolorem eum consequuntur
+                            ipsam repellat dolor soluta aliquid laborum, eius odit consectetur vel quasi in quidem,
+                            eveniet ab est corporis tempore.
                         </p>
                         <a href="">
                             Read More
@@ -340,7 +257,8 @@
                                 Look even slightly believable. If you are
                             </h5>
                             <p>
-                                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                alteration in some form, by injected humour, or randomised words which don't look even
+                                slightly believable.
                             </p>
                             <a href="">
                                 Read More
@@ -358,7 +276,8 @@
                                 Anything embarrassing hidden in the middle
                             </h5>
                             <p>
-                                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                alteration in some form, by injected humour, or randomised words which don't look even
+                                slightly believable.
                             </p>
                             <a href="">
                                 Read More
@@ -376,7 +295,8 @@
                                 Molestias magni natus dolores odio commodi. Quaerat!
                             </h5>
                             <p>
-                                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                alteration in some form, by injected humour, or randomised words which don't look even
+                                slightly believable.
                             </p>
                             <a href="">
                                 Read More
@@ -406,7 +326,7 @@
                             <div class="col-md-11 col-lg-10 mx-auto">
                                 <div class="box">
                                     <div class="img-box">
-                                        <img src="images/client.jpg" alt="" />
+                                        <img src="images/client.jpg" alt=""/>
                                     </div>
                                     <div class="detail-box">
                                         <div class="name">
@@ -430,7 +350,7 @@
                             <div class="col-md-11 col-lg-10 mx-auto">
                                 <div class="box">
                                     <div class="img-box">
-                                        <img src="images/client.jpg" alt="" />
+                                        <img src="images/client.jpg" alt=""/>
                                     </div>
                                     <div class="detail-box">
                                         <div class="name">
@@ -454,7 +374,7 @@
                             <div class="col-md-11 col-lg-10 mx-auto">
                                 <div class="box">
                                     <div class="img-box">
-                                        <img src="images/client.jpg" alt="" />
+                                        <img src="images/client.jpg" alt=""/>
                                     </div>
                                     <div class="detail-box">
                                         <div class="name">
@@ -503,16 +423,16 @@
                         </div>
                         <form action="">
                             <div>
-                                <input type="text" placeholder="Your Name" />
+                                <input type="text" placeholder="Your Name"/>
                             </div>
                             <div>
-                                <input type="text" placeholder="Phone Number" />
+                                <input type="text" placeholder="Phone Number"/>
                             </div>
                             <div>
-                                <input type="email" placeholder="Email" />
+                                <input type="email" placeholder="Email"/>
                             </div>
                             <div>
-                                <input type="text" class="message-box" placeholder="Message" />
+                                <input type="text" class="message-box" placeholder="Message"/>
                             </div>
                             <div class="btn_box">
                                 <button>
@@ -608,7 +528,7 @@
                                 SIGN UP TO OUR NEWSLETTER
                             </h4>
                             <form action="">
-                                <input type="text" placeholder="Enter Your Email" />
+                                <input type="text" placeholder="Enter Your Email"/>
                                 <button type="submit">
                                     Subscribe
                                 </button>
