@@ -6,13 +6,14 @@ use App\Entity\Address;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
 class OrderFactory
 {
-    private $security;
-    private $entityManager;
+    private Security $security;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(Security $security, EntityManagerInterface $entityManager)
     {
@@ -20,12 +21,20 @@ class OrderFactory
         $this->entityManager = $entityManager;
     }
 
-    public function create($params): Order
+    /**
+     * @param array<String, String> $params
+     * @return Order
+     */
+    public function create(array $params): Order
     {
         $order = new Order();
         $address = $this->createAddress($params);
+        /**
+         * @var User $user
+         */
+        $user = $this->security->getUser();
         $order
-            ->setCustomer($this->security->getUser())
+            ->setCustomer($user)
             ->setFirstName($params['inputFirstName'])
             ->setLastName($params['inputLastName'])
             ->setAddress($address);
@@ -34,7 +43,7 @@ class OrderFactory
             $product = $this->entityManager->getRepository(Product::class)->find($params['singleProduct']);
             $this->addOrderItem($order, $product, 1);
         } else {
-            $cartItems = $this->security->getUser()->getCart()->getCartItems();
+            $cartItems = $user->getCart()->getCartItems();
             foreach ($cartItems as $cartItem) {
                 $this->addOrderItem($order, $cartItem->getProduct(), $cartItem->getQuantity());
             }
@@ -45,7 +54,11 @@ class OrderFactory
         return $order;
     }
 
-    private function createAddress($params): Address
+    /**
+     * @param array<String, String> $params
+     * @return Address
+     */
+    private function createAddress(array $params): Address
     {
         $address = new Address();
         $address

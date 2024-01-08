@@ -33,9 +33,14 @@ class CheckoutController extends AbstractController
     public function index(?int $productId = null): Response
     {
         $productRepository = $this->entityManager->getRepository(Product::class);
+
+        /**
+         * @var User $user
+         */
+        $user = $this->user;
         return $this->render('checkout/index.html.twig', [
             'singleProduct' => $productId ? $productRepository->find($productId) : null,
-            'cartProducts' => $productId ? [] : $this->user->getCart()?->getItems()
+            'cartProducts' => $productId ? [] : $user->getCart()?->getCartItems()
         ]);
     }
 
@@ -49,7 +54,7 @@ class CheckoutController extends AbstractController
         return $this->redirectToRoute('app_order_details', ['orderId' => $order->getId()]);
     }
 
-    private function validateCsrfToken(Request $request)
+    private function validateCsrfToken(Request $request): void
     {
         $token = $request->request->get('token');
         if (!$this->isCsrfTokenValid('checkout', $token)) {
