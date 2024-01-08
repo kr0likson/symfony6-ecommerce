@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block body %}
+    <section class="order_summary_section layout_padding long_section">
+        <div class="container">
+            <h2>Order Summary</h2>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <strong>Customer:</strong> {{ order.getFirstName() }} {{ order.getLastName() }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Address:</strong> {{ order.getAddress().getAddress() }}, {{ order.getAddress().getAddress2() }}, {{ order.getAddress().getCity() }}, {{ order.getAddress().getState() }} {{ order.getAddress().getZipCode() }}, {{ order.getAddress().getCountry() }}
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <span class="h4">Payment status:</span>{{ order.getPaymentStatus() }}
+            </div>
+            <div id="productsList" class="row">
+                {% for orderItem in order.getOrderItem() %}
+                    <div class="col-md-5">
+                        <img class="img-fluid" src="../uploads/images/{{ orderItem.getProduct().getImage() }}">
+                    </div>
+                    <div class="col-md-7">
+                        <span>{{ orderItem.getProduct().getName() }}</span>
+                        <span>Quantity: {{ orderItem.getQuantity() }}</span>
+                        <span>Price: {{ orderItem.getProduct().getPrice() * orderItem.getQuantity() }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mt-4">
+                {% if order.getPaymentStatus() == 'IN_PROGRESS' %}
+                {% else %}
+                <a href="{{ path('app_stripe', {'orderId': order.id}) }}" class="btn btn-primary">Proceed to Payment</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
