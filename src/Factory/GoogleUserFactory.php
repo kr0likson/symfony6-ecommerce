@@ -18,6 +18,10 @@ class GoogleUserFactory
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param array<string, string> $parameters
+     * @return UserInterface
+     */
     public function create(array $parameters): UserInterface
     {
         $user = new GoogleUser();

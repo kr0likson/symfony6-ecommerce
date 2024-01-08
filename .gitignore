@@ -9,7 +9,7 @@
 /vendor/
 /node_modules/
 ###< symfony/framework-bundle ###
-
+/tools/php-cs-fixer/vendor/
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
@@ -24,3 +24,7 @@
 /public/assets/
 /assets/vendor
 ###< symfony/asset-mapper ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

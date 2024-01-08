@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Factory\GoogleUserFactory;
+use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\Persistence\ManagerRegistry;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -24,12 +25,12 @@ class GoogleCheckController extends AbstractController
     {
         $this->managerRegistry = $managerRegistry;
     }
-     #[Route('/google/check', name: 'app_check_google')]
-    public function connect(ClientRegistry $clientRegistry)
+    #[Route('/google/check', name: 'app_check_google')]
+    public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
         return $clientRegistry
             ->getClient('google') // key used in knpu_oauth2_client.yaml
-            ->redirect(['email']); // Ustawienie access_type na offline
+            ->redirect(['email'], []);
     }
 
     #[Route('/google/connect', name: 'app_connect_google')]
@@ -39,11 +40,13 @@ class GoogleCheckController extends AbstractController
         GoogleUserFactory $userFactory,
         UserAuthenticatorInterface $userAuthenticator,
         LoginFormAuthenticator $authenticator,
-    )
-    {
+    ): RedirectResponse {
         $client = $clientRegistry->getClient('google');
         $accessToken = $client->getAccessToken();
         $userCredentials = $client->fetchUserFromToken($accessToken)->toArray();
+        /**
+         * @var UserRepository $userRepository
+         */
         $userRepository = $this->managerRegistry->getRepository(User::class);
         $userCredentials['token'] = $accessToken->getToken();
         $user = $userRepository->findOneByEmailField($userCredentials['email']);
